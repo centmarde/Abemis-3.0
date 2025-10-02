@@ -1,14 +1,14 @@
-import { Navbar } from "@/components/navbar"
 
-export default function Home() {
+
+export default function Landing() {
   return (
-    <div className="min-h-screen">
-      <Navbar />
-      <main className="relative h-[calc(100vh-80px)] w-full">
+    <div id="home" className="min-h-screen">
+     
+      <main className="relative h-screen pt-16">
         {/* Background Image */}
         <div className="absolute inset-0">
           <img
-            src="/modern-glass-architecture-buildings-looking-up.jpg"
+            src="/assets/Hero.png"
             alt="Modern architecture background"
             className="h-full w-full object-cover"
           />
@@ -18,9 +18,11 @@ export default function Home() {
 
         {/* Hero Content */}
         <div className="relative z-10 flex h-full items-center px-6 md:px-12 lg:px-24">
-          <div className="max-w-4xl">
-            <h1 className="text-6xl font-bold text-orange-500 md:text-7xl lg:text-8xl">ABEMIS 3.0</h1>
-            <div className="mt-6 space-y-1 text-lg font-medium text-white md:text-xl lg:text-2xl">
+          <div className="max-w-7xl ml-0 md:ml-8 lg:ml-16">
+            <h1 className="text-7xl md:text-9xl lg:text-[12rem] xl:text-[12rem] font-bold tracking-wider whitespace-nowrap" style={{ color: '#d97706' }}>
+              ABEMIS 3.0
+            </h1>
+            <div className="mt-8 space-y-2 text-base md:text-lg lg:text-xl font-medium text-white tracking-wide">
               <p>AGRICULTURAL AND BIOSYSTEMS</p>
               <p>ENGINEERING MANAGEMENT</p>
               <p>INFORMATION SYSTEM (ABEMIS)</p>
