@@ -1,6 +1,16 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, vi } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import ProjectSection from '../ProjectSection'
+import type { ComponentProps, ReactNode } from 'react'
+
+// Mock the UI components
+interface MockButtonProps extends ComponentProps<'button'> {
+  children: ReactNode
+}
+
+vi.mock('@/components/ui/button', () => ({
+  Button: ({ children, ...props }: MockButtonProps) => <button {...props}>{children}</button>
+}))
 
 describe('ProjectSection Component', () => {
   it('renders without crashing', () => {
@@ -8,46 +18,72 @@ describe('ProjectSection Component', () => {
     expect(container).toBeTruthy()
   })
 
-  it('has the correct section id for navigation', () => {
-    const { container } = render(<ProjectSection />)
-    
-    const section = container.querySelector('#project')
-    expect(section).toBeTruthy()
-    expect(section?.tagName).toBe('SECTION')
-  })
-
   it('displays the main heading', () => {
     render(<ProjectSection />)
     
-    const heading = screen.getByText('Project Section')
+    const heading = screen.getByText('OUR PROJECTS OF ABEMIS 3.0')
     expect(heading).toBeTruthy()
-    expect(heading.tagName).toBe('H2')
+    expect(heading.tagName).toBe('H1')
   })
 
   it('displays the description text', () => {
     render(<ProjectSection />)
     
-    const description = screen.getByText('Agricultural and Biosystems Engineering Management Information System')
+    const description = screen.getByText(/Lorem ipsum dolor sit amet consectetur adipiscing elit/)
     expect(description).toBeTruthy()
   })
 
-  it('has proper section styling', () => {
+  it('has proper main element styling', () => {
     const { container } = render(<ProjectSection />)
     
-    const section = container.querySelector('section')
-    expect(section).toBeTruthy()
-    expect(section?.className).toContain('min-h-screen')
-    expect(section?.className).toContain('bg-white')
+    const main = container.querySelector('main')
+    expect(main).toBeTruthy()
+    expect(main?.className).toContain('min-h-screen')
+    expect(main?.className).toContain('bg-[#f5f5f5]')
   })
 
-  it('uses semantic HTML structure', () => {
+  it('renders three project images', () => {
+    render(<ProjectSection />)
+    
+    const constructionImage = screen.getByAltText('Construction vehicle')
+    const infrastructureImage = screen.getByAltText('Infrastructure project')
+    const produceImage = screen.getByAltText('Agricultural produce')
+    
+    expect(constructionImage).toBeTruthy()
+    expect(infrastructureImage).toBeTruthy()
+    expect(produceImage).toBeTruthy()
+    
+    expect(constructionImage.getAttribute('src')).toBe('/yellow-construction-tractor-vehicle.jpg')
+    expect(infrastructureImage.getAttribute('src')).toBe('/white-barn-with-silos-rural-farm.jpg')
+    expect(produceImage.getAttribute('src')).toBe('/fresh-vegetables-produce-carrots.jpg')
+  })
+
+  it('displays project number and title', () => {
+    render(<ProjectSection />)
+    
+    expect(screen.getByText('02')).toBeTruthy()
+    expect(screen.getByText('INFRASTRACTURE')).toBeTruthy()
+    expect(screen.getByText('Project')).toBeTruthy()
+  })
+
+  it('renders the see detail button', () => {
+    render(<ProjectSection />)
+    
+    const button = screen.getByText('SEE DETAIL')
+    expect(button).toBeTruthy()
+  })
+
+  it('uses grid layout for images', () => {
     const { container } = render(<ProjectSection />)
     
-    const section = container.querySelector('section')
-    expect(section).toBeTruthy()
-    expect(section?.tagName).toBe('SECTION')
+    const grid = container.querySelector('.grid-cols-12')
+    expect(grid).toBeTruthy()
+  })
+
+  it('has center text alignment for header', () => {
+    const { container } = render(<ProjectSection />)
     
-    const h2 = container.querySelector('h2')
-    expect(h2).toBeTruthy()
+    const textCenter = container.querySelector('.text-center')
+    expect(textCenter).toBeTruthy()
   })
 })

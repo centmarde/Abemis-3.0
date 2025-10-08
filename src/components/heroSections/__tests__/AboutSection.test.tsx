@@ -45,18 +45,33 @@ describe('AboutSection Component', () => {
     expect(screen.getByText('OUR Services')).toBeTruthy()
   })
 
-  it('has proper main element', () => {
+  it('has proper main element with correct styling', () => {
     render(<AboutSection />)
     
     const main = screen.getByRole('main')
     expect(main).toBeTruthy()
-    expect(main.className).toContain('min-h-screen')
+    expect(main.className).toContain('bg-[#f5f1ed]')
   })
 
   it('displays description text', () => {
     render(<AboutSection />)
     
-    const description = screen.getByText(/Lorem ipsum dolor sit amet/)
+    const description = screen.getByText(/Lorem ipsum dolor sit amet consectetur adipiscing elit/)
     expect(description).toBeTruthy()
+  })
+
+  it('has decorative line element', () => {
+    const { container } = render(<AboutSection />)
+    
+    const decorativeLine = container.querySelector('.bg-black')
+    expect(decorativeLine).toBeTruthy()
+  })
+
+  it('uses responsive grid layout', () => {
+    const { container } = render(<AboutSection />)
+    
+    const gridContainer = container.querySelector('.grid')
+    expect(gridContainer).toBeTruthy()
+    expect(gridContainer?.className).toContain('lg:grid-cols-2')
   })
 })

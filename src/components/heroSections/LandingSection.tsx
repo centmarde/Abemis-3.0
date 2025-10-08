@@ -17,8 +17,8 @@ export default function Landing() {
         </div>
 
         {/* Hero Content */}
-        <div className="relative z-10 flex h-full items-center px-6 md:px-12 lg:px-24">
-          <div className="max-w-7xl ml-0 md:ml-8 lg:ml-16">
+        <div className="container-fluid relative z-10 flex h-full items-center px-6 md:px-12 lg:px-24">
+          <div className="ml-0 md:ml-8 lg:ml-16">
             <h1 className="text-7xl md:text-9xl lg:text-[12rem] xl:text-[12rem] font-bold tracking-wider whitespace-nowrap" style={{ color: '#d97706' }}>
               ABEMIS 3.0
             </h1>
@@ -32,7 +32,7 @@ export default function Landing() {
 
       
       </main>
-         <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-24">
+         <div className="container-fluid px-6 md:px-12 lg:px-24">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
             Counts of Registered
