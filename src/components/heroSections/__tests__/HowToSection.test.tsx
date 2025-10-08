@@ -1,6 +1,26 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, vi } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import HowToSection from '../HowToSection'
+import type { ComponentProps, ReactNode } from 'react'
+
+// Mock the UI components
+interface MockButtonProps extends ComponentProps<'button'> {
+  children: ReactNode
+}
+
+vi.mock('@/components/ui/button', () => ({
+  Button: ({ children, ...props }: MockButtonProps) => <button {...props}>{children}</button>
+}))
+
+// Mock lucide-react icons
+vi.mock('lucide-react', () => ({
+  ArrowUpRight: () => <div data-testid="arrow-up-right-icon">ArrowUpRight</div>,
+  Linkedin: () => <div data-testid="linkedin-icon">Linkedin</div>,
+  Facebook: () => <div data-testid="facebook-icon">Facebook</div>,
+  Instagram: () => <div data-testid="instagram-icon">Instagram</div>,
+  Youtube: () => <div data-testid="youtube-icon">Youtube</div>,
+  Image: () => <div data-testid="image-icon">Image</div>
+}))
 
 describe('HowToSection Component', () => {
   it('renders without crashing', () => {
@@ -8,27 +28,34 @@ describe('HowToSection Component', () => {
     expect(container).toBeTruthy()
   })
 
-  it('has the correct section id for navigation', () => {
-    const { container } = render(<HowToSection />)
-    
-    const section = container.querySelector('#how-to')
-    expect(section).toBeTruthy()
-    expect(section?.tagName).toBe('SECTION')
-  })
-
-  it('displays the main heading', () => {
+  it('displays the contact section heading', () => {
     render(<HowToSection />)
     
-    const heading = screen.getByText('How to')
-    expect(heading).toBeTruthy()
-    expect(heading.tagName).toBe('H2')
+    expect(screen.getByText('HAVE QUESTIONS?')).toBeTruthy()
+    expect(screen.getByText('REACH OUT!')).toBeTruthy()
   })
 
-  it('displays the description text', () => {
+  it('renders the contact us button', () => {
     render(<HowToSection />)
     
-    const description = screen.getByText('Agricultural and Biosystems Engineering Management Information System')
-    expect(description).toBeTruthy()
+    const button = screen.getByText('CONTACT US')
+    expect(button).toBeTruthy()
+  })
+
+  it('displays the ABEMIS 3.0 text with background image', () => {
+    render(<HowToSection />)
+    
+    const abemisHeading = screen.getByText('ABEMIS 3.0')
+    expect(abemisHeading).toBeTruthy()
+    expect(abemisHeading.tagName).toBe('H3')
+  })
+
+  it('renders the agricultural equipment background image', () => {
+    render(<HowToSection />)
+    
+    const image = screen.getByAltText('ABEMIS 3.0 Agricultural Equipment')
+    expect(image).toBeTruthy()
+    expect(image.getAttribute('src')).toBe('/yellow-harvester-combine-in-wheat-field.jpg')
   })
 
   it('has proper section styling', () => {
@@ -36,18 +63,38 @@ describe('HowToSection Component', () => {
     
     const section = container.querySelector('section')
     expect(section).toBeTruthy()
-    expect(section?.className).toContain('min-h-screen')
     expect(section?.className).toContain('bg-white')
   })
 
-  it('uses semantic HTML structure', () => {
+  it('displays footer navigation links', () => {
+    render(<HowToSection />)
+    
+    expect(screen.getByText('HOME')).toBeTruthy()
+    expect(screen.getByText('ABOUT')).toBeTruthy()
+    expect(screen.getByText('PROJECTS')).toBeTruthy()
+    expect(screen.getByText('SERVICES')).toBeTruthy()
+    expect(screen.getByText('HOW TO?')).toBeTruthy()
+  })
+
+  it('displays copyright text', () => {
+    render(<HowToSection />)
+    
+    expect(screen.getByText('© 2025 ABEMIS 3.0. All Rights Reserved')).toBeTruthy()
+  })
+
+  it('renders social media icons', () => {
     const { container } = render(<HowToSection />)
     
-    const section = container.querySelector('section')
-    expect(section).toBeTruthy()
-    expect(section?.tagName).toBe('SECTION')
+    expect(container.querySelector('[data-testid="linkedin-icon"]')).toBeTruthy()
+    expect(container.querySelector('[data-testid="facebook-icon"]')).toBeTruthy()
+    expect(container.querySelector('[data-testid="instagram-icon"]')).toBeTruthy()
+    expect(container.querySelector('[data-testid="youtube-icon"]')).toBeTruthy()
+  })
+
+  it('renders certification logo placeholders', () => {
+    render(<HowToSection />)
     
-    const h2 = container.querySelector('h2')
-    expect(h2).toBeTruthy()
+    expect(screen.getByAltText('Certification Logo 1')).toBeTruthy()
+    expect(screen.getByAltText('Certification Logo 2')).toBeTruthy()
   })
 })

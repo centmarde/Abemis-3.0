@@ -44,4 +44,34 @@ describe('LandingSection Component', () => {
     const section = container.querySelector('#home')
     expect(section).toBeTruthy()
   })
+
+  it('has full screen height main section', () => {
+    const { container } = render(<LandingSection />)
+    
+    const main = container.querySelector('main')
+    expect(main).toBeTruthy()
+    expect(main?.className).toContain('h-screen')
+  })
+
+  it('has dark overlay on background image', () => {
+    const { container } = render(<LandingSection />)
+    
+    const overlay = container.querySelector('.bg-black\\/40')
+    expect(overlay).toBeTruthy()
+  })
+
+  it('displays subtitle about Agricultural and Biosystems Engineering', () => {
+    render(<LandingSection />)
+    
+    const subtitle = screen.getByText('Agricultural and Biosystems Engineering Management Information System')
+    expect(subtitle).toBeTruthy()
+  })
+
+  it('uses responsive text sizing', () => {
+    render(<LandingSection />)
+    
+    const heading = screen.getByText('ABEMIS 3.0')
+    expect(heading.className).toContain('text-7xl')
+    expect(heading.className).toContain('md:text-9xl')
+  })
 })
