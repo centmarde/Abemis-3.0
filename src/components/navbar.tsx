@@ -1,7 +1,9 @@
 import { Button } from "@/components/ui/button"
 import { Building2, Leaf } from "lucide-react"
+import { useNavigate } from "react-router-dom"
 
 export function Navbar() {
+  const navigate = useNavigate();
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
@@ -42,31 +44,31 @@ export function Navbar() {
         <div className="hidden items-center gap-8 md:flex">
           <button 
             onClick={scrollToTop}
-            className="text-sm font-medium text-foreground transition-colors hover:text-foreground/80"
+            className="text-sm font-medium text-foreground transition-colors hover:text-foreground/80 cursor-pointer"
           >
             HOME
           </button>
           <button
             onClick={() => scrollToSection('about')}
-            className="text-sm font-medium text-foreground transition-colors hover:text-foreground/80"
+            className="text-sm font-medium text-foreground transition-colors hover:text-foreground/80 cursor-pointer"
           >
             ABOUT
           </button>
           <button
             onClick={() => scrollToSection('project')}
-            className="text-sm font-medium text-foreground transition-colors hover:text-foreground/80"
+            className="text-sm font-medium text-foreground transition-colors hover:text-foreground/80 cursor-pointer"
           >
             PROJECT
           </button>
           <button
             onClick={() => scrollToSection('services')}
-            className="text-sm font-medium text-foreground transition-colors hover:text-foreground/80"
+            className="text-sm font-medium text-foreground transition-colors hover:text-foreground/80 cursor-pointer"
           >
             SERVICES
           </button>
           <button
             onClick={() => scrollToSection('how-to')}
-            className="text-sm font-medium text-foreground transition-colors hover:text-foreground/80"
+            className="text-sm font-medium text-foreground transition-colors hover:text-foreground/80 cursor-pointer"
           >
             HOW TO?
           </button>
@@ -74,10 +76,10 @@ export function Navbar() {
 
         {/* Auth Buttons */}
         <div className="flex items-center gap-3">
-          <Button  className="text-sm font-medium">
+          <Button onClick={() => navigate('/login')} className="text-sm font-medium">
             Sign In
           </Button>
-          <Button className="bg-black text-sm font-medium text-white hover:bg-black/90">Sign Up</Button>
+          <Button onClick={() => navigate('/register')} className="bg-black text-sm font-medium text-white hover:bg-black/90">Sign Up</Button>
         </div>
       </div>
     </nav>

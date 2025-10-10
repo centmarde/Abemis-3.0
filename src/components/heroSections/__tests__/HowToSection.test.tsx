@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 import { render, screen } from '@testing-library/react'
-import HowToSection from '../HowToSection'
+import HowToSection from '../../Footer'
 import type { ComponentProps, ReactNode } from 'react'
 
 // Mock the UI components

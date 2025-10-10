@@ -49,7 +49,7 @@ export default function HowToSection() {
   }, [])
 
   return (
-    <section className="relative bg-white">
+    <section id="how-to" className="relative bg-white">
       
       {/* Contact Section */}
       <div className="py-16 px-4">

@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
+import { useAuthStore } from '@/stores/authStore';
 
 // Define guard types
 export type GuardCondition = () => boolean | Promise<boolean>;
@@ -13,14 +14,15 @@ export interface RouteGuardConfig {
 
 // Authentication guard example
 export const isAuthenticated = (): boolean => {
-  // Check if user is authenticated using the auth token
-  return !!localStorage.getItem('authToken');
+  // Check if user is authenticated using Zustand store
+  const { isAuthenticated } = useAuthStore.getState();
+  return isAuthenticated;
 };
 
 // Role-based guard example
 export const hasRole = (requiredRole: string): boolean => {
-  const userRole = localStorage.getItem('userRole');
-  return userRole === requiredRole;
+  const { userData } = useAuthStore.getState();
+  return userData.role === requiredRole;
 };
 
 // Custom guard component

@@ -3,20 +3,29 @@ import type { RouteObject } from 'react-router-dom';
 import HeroView from '@/pages/HeroView';
 import Dashboard from '@/pages/Dashboard';
 import Login from '@/pages/Login';
+import Register from '@/pages/Register';
+import ForgotPass from '@/pages/ForgotPass';
 import Forbidden from '@/pages/Forbidden';
 import NotFound from '@/pages/NotFound';
+import OuterLayout from '@/layouts/OuterLayout';
 import { GuardedRoute, authGuard, guestGuard } from './guard';
 
 // Define your routes
 export const routes: RouteObject[] = [
-  // Public pages - redirect to dashboard if authenticated
+  // Public pages with Navbar and Footer layout
   {
     path: '/',
-    element: (
-      <GuardedRoute guards={[guestGuard]}>
-        <HeroView />
-      </GuardedRoute>
-    ),
+    element: <OuterLayout />,
+    children: [
+      {
+        index: true,
+        element: (
+          <GuardedRoute guards={[guestGuard]}>
+            <HeroView />
+          </GuardedRoute>
+        ),
+      },
+    ],
   },
   // Protected route - requires authentication
   {
@@ -33,6 +42,22 @@ export const routes: RouteObject[] = [
     element: (
       <GuardedRoute guards={[guestGuard]}>
         <Login />
+      </GuardedRoute>
+    ),
+  },
+  {
+    path: '/register',
+    element: (
+      <GuardedRoute guards={[guestGuard]}>
+        <Register />
+      </GuardedRoute>
+    ),
+  },
+  {
+    path: '/forgot-password',
+    element: (
+      <GuardedRoute guards={[guestGuard]}>
+        <ForgotPass />
       </GuardedRoute>
     ),
   },

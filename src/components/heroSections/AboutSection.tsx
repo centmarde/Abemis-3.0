@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button"
 
 export default function Home() {
   return (
-    <main className="bg-[#f5f1ed]">
+    <main id="about" className="bg-[#f5f1ed]">
       <div className="container-fluid px-4 py-8 sm:px-6 md:px-8 md:py-12 lg:py-16">
         {/* Header */}
         <div className="mb-8 text-center sm:text-right md:mb-12">
