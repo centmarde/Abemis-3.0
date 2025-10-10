@@ -8,6 +8,7 @@ import ForgotPass from '@/pages/ForgotPass';
 import Forbidden from '@/pages/Forbidden';
 import NotFound from '@/pages/NotFound';
 import OuterLayout from '@/layouts/OuterLayout';
+import InnerLayout from '@/layouts/InnerLayout';
 import { GuardedRoute, authGuard, guestGuard } from './guard';
 
 // Define your routes
@@ -27,14 +28,20 @@ export const routes: RouteObject[] = [
       },
     ],
   },
-  // Protected route - requires authentication
+  // Protected routes with Sidebar layout - requires authentication
   {
-    path: '/dashboard',
+    path: '/',
     element: (
       <GuardedRoute guards={[authGuard]}>
-        <Dashboard />
+        <InnerLayout />
       </GuardedRoute>
     ),
+    children: [
+      {
+        path: 'dashboard',
+        element: <Dashboard />,
+      },
+    ],
   },
   // Guest-only route - redirects authenticated users
   {

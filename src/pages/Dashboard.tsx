@@ -3,18 +3,14 @@ import { useAuthStore } from '@/stores/authStore';
 
 export default function Dashboard() {
   const navigate = useNavigate();
-  const { userData, logout } = useAuthStore();
+  const { userData, handleLogout } = useAuthStore();
 
-  const handleLogout = () => {
-    // Clear auth state using Zustand
-    logout();
-    
-    // Redirect to login page
-    navigate('/login');
+  const onLogout = () => {
+    handleLogout(navigate);
   };
 
   return (
-    <div className="min-h-screen p-8 bg-gray-100">
+    <div className="p-8 bg-gray-100 min-h-full">
       <div className="max-w-4xl mx-auto">
         <div className="bg-white rounded-lg shadow-lg p-8">
           <h1 className="text-3xl font-bold mb-6 text-gray-800">Dashboard</h1>
@@ -56,7 +52,7 @@ export default function Dashboard() {
               This is a protected route. Only authenticated users can access this page.
             </p>
             <button
-              onClick={handleLogout}
+              onClick={onLogout}
               className="px-6 py-3 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors font-medium"
             >
               Logout

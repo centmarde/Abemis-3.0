@@ -13,6 +13,7 @@ interface AuthState {
   userData: UserData;
   login: (email: string) => void;
   logout: () => void;
+  handleLogout: (navigate: (path: string) => void) => void;
   updateUserData: (data: Partial<UserData>) => void;
 }
 
@@ -60,6 +61,22 @@ export const useAuthStore = create<AuthState>()(
         });
         // Explicitly remove the persisted data from localStorage
         localStorage.removeItem('auth-storage');
+      },
+      handleLogout: (navigate: (path: string) => void) => {
+        // Clear auth state
+        set({
+          isAuthenticated: false,
+          userData: {
+            email: '',
+            role: '',
+            userId: '',
+            token: '',
+          },
+        });
+        // Explicitly remove the persisted data from localStorage
+        localStorage.removeItem('auth-storage');
+        // Redirect to login page
+        navigate('/login');
       },
       updateUserData: (data: Partial<UserData>) => {
         set((state) => ({
