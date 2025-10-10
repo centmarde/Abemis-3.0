@@ -17,36 +17,25 @@ export default function HowToSection() {
       if (width < 640) {
         // Mobile - no mask effect
         setIsMobile(true)
-      } else {
-        setIsMobile(false)
-        
-        let backgroundSize = '123% auto'
-        let backgroundPosition = 'center 27%'
-        let stroke = '2px rgba(0,0,0,0.2)'
-        
-        if (width < 768) {
-          // Small tablets
-          backgroundSize = '140% auto'
-          backgroundPosition = 'center 30%'
-          stroke = '1px rgba(0,0,0,0.25)'
-        } else if (width < 1024) {
-          // Medium tablets
-          backgroundSize = '130% auto'
-          backgroundPosition = 'center 28%'
-          stroke = '1.5px rgba(0,0,0,0.2)'
-        } else {
-          // Desktop
-          backgroundSize = '123% auto'
-          backgroundPosition = 'center 27%'
-          stroke = '2px rgba(0,0,0,0.2)'
-        }
-        
-        setMaskStyles({
-          backgroundSize,
-          backgroundPosition,
-          WebkitTextStroke: stroke,
-        })
+        return
       }
+      
+      setIsMobile(false)
+      
+      // Define breakpoint configurations
+      const config = {
+        sm: { size: '140% auto', position: 'center 30%', stroke: '1px rgba(0,0,0,0.25)' },
+        md: { size: '130% auto', position: 'center 28%', stroke: '1.5px rgba(0,0,0,0.2)' },
+        lg: { size: '108% auto', position: 'center 20%', stroke: '2px rgba(0,0,0,0.2)' }
+      }
+      
+      const styles = width < 768 ? config.sm : width < 1024 ? config.md : config.lg
+      
+      setMaskStyles({
+        backgroundSize: styles.size,
+        backgroundPosition: styles.position,
+        WebkitTextStroke: styles.stroke,
+      })
     }
     
     // Initial call
@@ -89,7 +78,7 @@ export default function HowToSection() {
         {/* Text with mask effect on white background - positioned first */}
         <div className="relative bg-white flex items-center justify-center py-1 z-10">
           <h3 
-            className="text-[60px] xs:text-[80px] sm:text-[120px] md:text-[180px] lg:text-[240px] xl:text-[320px] font-bold tracking-wide sm:tracking-wider leading-none px-2 sm:px-4 select-none"
+            className="text-[60px] xs:text-[80px] sm:text-[120px] md:text-[180px] lg:text-[240px] xl:text-[300px] font-bold tracking-wide sm:tracking-wider leading-none px-2 sm:px-4 select-none"
             style={
               isMobile
                 ? {
