@@ -71,3 +71,17 @@ export default defineConfig([
   },
 ])
 ```
+# Run all tests
+pnpm test
+
+# Run specific test file
+pnpm test AboutSection.test.tsx
+
+# Run tests with UI (interactive)
+pnpm test -- --ui
+
+# Run tests with coverage
+pnpm test -- --coverage
+
+# Exit watch mode
+Press 'q' in the terminal
