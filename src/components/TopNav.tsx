@@ -47,16 +47,16 @@ export function Topnav({ onMenuClick }: TopnavProps) {
         {/* User Menu */}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="text-gray-700 hover:bg-gray-100 gap-1">
-              <span className="font-medium">CN</span>
+            <button className="flex items-center gap-1 px-3 py-2 rounded-md text-gray-700 hover:bg-gray-100 font-medium transition-colors">
+              <span>CN</span>
               <ChevronDown className="w-4 h-4" />
-            </Button>
+            </button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end" className="w-56">
             <DropdownMenuLabel>
               <div className="flex flex-col space-y-1">
-                <p className="text-sm font-medium leading-none">{userData.email}</p>
-                <p className="text-xs leading-none text-muted-foreground capitalize">{userData.role}</p>
+                <p className="text-sm font-medium leading-none">{userData?.email || 'User'}</p>
+                <p className="text-xs leading-none text-muted-foreground capitalize">{userData?.role || 'Guest'}</p>
               </div>
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
@@ -69,7 +69,7 @@ export function Topnav({ onMenuClick }: TopnavProps) {
               <span>Settings</span>
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem onClick={onLogout} className="text-red-600 focus:text-red-600">
+            <DropdownMenuItem onClick={onLogout} className="text-red-600 focus:text-red-600 cursor-pointer">
               <LogOut className="mr-2 h-4 w-4" />
               <span>Logout</span>
             </DropdownMenuItem>
