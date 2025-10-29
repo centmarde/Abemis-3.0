@@ -6,7 +6,7 @@ export default function ProjectsPage() {
     <>
     
 
-      <section className="relative bg-[#0a0a0a] py-16 px-4 overflow-hidden">
+      <section id="services" className="relative bg-[#0a0a0a] py-16 px-4 overflow-hidden">
         {/* Diagonal stripe pattern background */}
         <div
           className="absolute inset-0 opacity-10"

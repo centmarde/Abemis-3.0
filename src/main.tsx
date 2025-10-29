@@ -1,11 +1,12 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import Hero from '@/pages/HeroView'
+import { RouterProvider } from 'react-router-dom'
+import { router } from '@/router'
 import './index.css'
 
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <Hero />
+    <RouterProvider router={router} />
   </StrictMode>,
 )

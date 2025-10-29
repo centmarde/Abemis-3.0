@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button"
 
 export default function ProjectsPage() {
   return (
-    <main className="min-h-screen bg-[#f5f5f5] py-8 md:py-16 px-4">
+    <main id="project" className="min-h-screen bg-[#f5f5f5] py-8 md:py-16 px-4">
       <div className="container-fluid">
         {/* Header Section */}
         <div className="text-center mb-8 md:mb-16">
